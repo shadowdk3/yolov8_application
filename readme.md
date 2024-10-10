@@ -5,15 +5,9 @@
 - Pytorch
 - Tensorflow
 
-## Dataset
+## Project 
 
-https://www.kaggle.com/datasets/pkdarabi/medical-image-dataset-brain-tumor-detection/data
-
-## Output
-
-![](/ref/single.jpg)
-
-![](/ref/multi.jpg)
+- Brain Tumor Detection
 
 ## Run Script
 
