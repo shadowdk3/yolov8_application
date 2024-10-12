@@ -6,8 +6,8 @@ import sys
 import time
 from dataclasses import dataclass
 
-from src.exception import CustomException
-from src.logger import logging
+from brain_tumor_detection.exception import CustomException
+from brain_tumor_detection.logger import logging
 
 SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
 SOURCE_PATH = os.path.dirname(SCRIPT_PATH)
@@ -16,7 +16,7 @@ DATA_BASE = os.path.dirname(PROJECT_PATH)
 
 @dataclass
 class ModelTrainerConfig:
-    data_path=os.path.join(DATA_BASE, 'data/TumorDetectionYolov8/brainTumorDetection/data.yaml')
+    data_path=os.path.join(DATA_BASE, '../data/TumorDetectionYolov8/brainTumorDetection/data.yaml')
     
 @dataclass
 class YOLOV8TrainerConfig:

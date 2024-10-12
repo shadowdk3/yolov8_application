@@ -17,10 +17,12 @@ def get_requirements(file_path:str)->List[str]:
     return requirements
 
 setup(
-    name='brain_tumor_detection_yolov8',
+    name='brain_tumor_detection',
     version='0.0.1',
     author='Suki',
     author_email='shadowdk3@gmail.com',
-    packages=find_packages(),
+    # packages=find_packages(),
+    packages=find_packages(where='src'),  # Finds all packages under 'src'
+    package_dir={'': 'src'},              # Specifies 'src' as the root for modules
     install_requires=get_requirements('requirements.txt')
 )

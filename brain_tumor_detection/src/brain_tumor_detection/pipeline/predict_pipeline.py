@@ -8,14 +8,14 @@ import numpy as np
 from ultralytics import YOLO
 from ultralytics.utils.plotting import Annotator, colors
 
-from src.exception import CustomException
-from src.logger import logging
+from brain_tumor_detection.exception import CustomException
+from brain_tumor_detection.logger import logging
 
 import matplotlib.pyplot as plt
 
 class PredictPipeline:
     def __init__(self):
-        model_path = 'runs/detect/train/weights/best.pt'
+        model_path = 'brain_tumor_detection/runs/detect/train/weights/best.pt'
         
         self.model = YOLO(model_path)
 
@@ -70,6 +70,7 @@ class PredictPipeline:
                 image_files = filepath
                 
                 image = cv2.imread(image_files)
+                # original_height, original_width = image.shape[:2] 
                 
                 resized_image = self.resize_image(image, size=(640, 640))
                 normalized_image = self.normalize_image(resized_image)
@@ -80,15 +81,18 @@ class PredictPipeline:
                 annotated_image = results[0].plot(line_width=1)
                 annotated_image_rgb = cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB)
 
-                cv2.imwrite('single.jpg', annotated_image_rgb)
-                plt.imshow(annotated_image_rgb)
-                plt.axis('off')
-                plt.show()
+                # reshaped_image = cv2.resize(annotated_image_rgb, (original_width, original_height))
+                
+                return (
+                    True, 
+                    annotated_image_rgb
+                )
+                # cv2.imwrite('single.jpg', annotated_image_rgb)
                 
         except Exception as e:
             raise CustomException(e, sys)
         
-if __name__ == "__main__":
-    predictPipeline = PredictPipeline()
-    predictPipeline.predict('../data/TumorDetectionYolov8/brainTumorDetection/test/images')
-    predictPipeline.predict('../data/TumorDetectionYolov8/brainTumorDetection/test/images/volume_268_slice_46_jpg.rf.f35fba1c4ee98c30a98d21c7959f1089.jpg')
+# if __name__ == "__main__":
+#     predictPipeline = PredictPipeline()
+#     predictPipeline.predict('../data/TumorDetectionYolov8/brainTumorDetection/test/images')
+#     predictPipeline.predict('../data/TumorDetectionYolov8/brainTumorDetection/test/images/volume_268_slice_46_jpg.rf.f35fba1c4ee98c30a98d21c7959f1089.jpg')
