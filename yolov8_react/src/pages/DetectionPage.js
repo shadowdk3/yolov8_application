@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';  // Import Link from React Router
 
 function DetectionPage() {
   const [image, setImage] = useState(null);
@@ -50,6 +51,7 @@ function DetectionPage() {
 
   return (
     <div>
+      <Link to="/">Return to Home</Link>
       <h1>Detection</h1>
       <form onSubmit={handleSubmit}>
         <input type="file" accept="image/*" onChange={handleImageChange} />
